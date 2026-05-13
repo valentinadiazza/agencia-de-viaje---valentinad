@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelWorld Experience</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <img src="img/vale.png" style="width: 50%; image-orientation: center;">
+<script>
+    let cliente;
+    let codigoServicio;
+    let servicio = "";
+    let valorServicio = 0;
+    let asesor = "";
+    let continuarCliente = "si";
+    let totalVentas = 0;
+    let dineroTotal = 0;
+    let totalClientes = 0;
+    let tiquetes = 0;
+    let hospedaje = 0;
+    let vehiculos = 0;
+    let pasadias = 0;
+
+    let ventasSofia = 0;
+    let ventasCarlos = 0;
+    let ventasLaura = 0;
+    let ventasAndres = 0;
+
+    document.write("<div class='contenedor'>");
+    document.write("<h1>TravelWorld Experience</h1>");
+    document.write("<h2>Sistema de Ventas Turísticas</h2>");
+
+    do {
+
+        cliente = prompt("Digite el nombre del cliente:");
+        totalClientes++;
+
+        let continuarServicio = "si";
+        let totalCliente = 0;
+
+        document.write("<div class='venta'>");
+        document.write("<h3>Cliente: " + cliente + "</h3>");
+
+        do {
+
+            codigoServicio = prompt(
+                "Seleccione servicio turístico:\n" +
+                "A = Tiquetes Aéreos\n" +
+                "B = Hospedaje\n" +
+                "C = Alquiler de Vehículos\n" +
+                "D = Pasadías"
+            );
+
+            switch ((codigoServicio || "").toUpperCase()) {
+
+                case "A":
+                    servicio = "Tiquetes Aéreos";
+                    valorServicio = 800000;
+                    asesor = "Sofía";
+                    ventasSofia++;
+                    tiquetes++;
+                    break;
+
+                case "B":
+                    servicio = "Hospedaje";
+                    valorServicio = 500000;
+                    asesor = "Carlos";
+                    ventasCarlos++;
+                    hospedaje++;
+                    break;
+
+                case "C":
+                    servicio = "Alquiler de Vehículos";
+                    valorServicio = 300000;
+                    asesor = "Laura";
+                    ventasLaura++;
+                    vehiculos++;
+                    break;
+
+                case "D":
+                    servicio = "Pasadías";
+                    valorServicio = 150000;
+                    asesor = "Andrés";
+                    ventasAndres++;
+                    pasadias++;
+                    break;
+
+                default:
+                    servicio = "Servicio no válido";
+                    valorServicio = 0;
+                    asesor = "Sin asesor";
+            }
+
+            if (valorServicio > 0) {
+                totalVentas++;
+                dineroTotal = dineroTotal + valorServicio;
+                totalCliente = totalCliente + valorServicio;
+            }
+
+            document.write("<hr>");
+            document.write("Servicio: " + servicio + "<br>");
+            document.write("Asesor: " + asesor + "<br>");
+            document.write("Valor: $" + valorServicio + "<br>");
+
+            continuarServicio = prompt(
+                "¿Desea agregar otro servicio para este cliente? (si/no)"
+            ).toLowerCase();
+
+        } while (continuarServicio == "si");
+
+
+        document.write(
+            "<strong>Total a pagar del cliente:</strong> $" +
+            totalCliente + "<br>"
+        );
+
+        document.write("</div>");
+
+        continuarCliente = prompt(
+            "¿Desea registrar otro cliente? (si/no)"
+        ).toLowerCase();
+
+    } while (continuarCliente == "si");
+
+   
+
+    let servicioPopular = "Tiquetes Aéreos";
+
+    if (
+        hospedaje > tiquetes &&
+        hospedaje > vehiculos &&
+        hospedaje > pasadias
+    ) {
+        servicioPopular = "Hospedaje";
+    }
+
+    if (
+        vehiculos > tiquetes &&
+        vehiculos > hospedaje &&
+        vehiculos > pasadias
+    ) {
+        servicioPopular = "Alquiler de Vehículos";
+    }
+
+    if (
+        pasadias > tiquetes &&
+        pasadias > hospedaje &&
+        pasadias > vehiculos
+    ) {
+        servicioPopular = "Pasadías";
+    }
+
+    let mejorAsesor = "Sofía";
+
+    if (
+        ventasCarlos > ventasSofia &&
+        ventasCarlos > ventasLaura &&
+        ventasCarlos > ventasAndres
+    ) {
+        mejorAsesor = "Carlos";
+    }
+
+    if (
+        ventasLaura > ventasSofia &&
+        ventasLaura > ventasCarlos &&
+        ventasLaura > ventasAndres
+    ) {
+        mejorAsesor = "Laura";
+    }
+
+    if (
+        ventasAndres > ventasSofia &&
+        ventasAndres > ventasCarlos &&
+        ventasAndres > ventasLaura
+    ) {
+        mejorAsesor = "Andrés";
+    }
+
+    let rendimiento = "";
+    let claseColor = "";
+
+    if (totalVentas < 3) {
+        rendimiento = "Bajo rendimiento";
+        claseColor = "bajo";
+    } else if (totalVentas >= 3 && totalVentas <= 5) {
+        rendimiento = "Rendimiento aceptable";
+        claseColor = "aceptable";
+    } else {
+        rendimiento = "Rendimiento excelente";
+        claseColor = "excelente";
+    }
+
+
+    document.write("<hr>");
+    document.write("<h2>Resumen Final</h2>");
+    document.write("Total clientes atendidos: " + totalClientes + "<br>");
+    document.write("Total ventas realizadas: " + totalVentas + "<br>");
+    document.write("Dinero total vendido: $" + dineroTotal + "<br>");
+    document.write("Servicio más solicitado: " + servicioPopular + "<br>");
+    document.write("<strong>Asesor con más ventas:</strong> " + mejorAsesor + "<br>");
+    document.write("Ventas Sofía: " + ventasSofia + "<br>");
+    document.write("Ventas Carlos: " + ventasCarlos + "<br>");
+    document.write("Ventas Laura: " + ventasLaura + "<br>");
+    document.write("Ventas Andrés: " + ventasAndres + "<br>");
+    document.write( "Nivel de rendimiento: " + "<span class='" + claseColor + "'>" + rendimiento + "</span>");
+    document.write("</div>");
+</script>
+
+</body>
+</html>
